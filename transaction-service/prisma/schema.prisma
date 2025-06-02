@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./__generate__"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Transactions {
+  id                 BigInt            @id @default(autoincrement())
+  receivedCardNumber String            @map("receive_card_number")
+  senderCardNumber   String?           @map("sender_card_number")
+  amount             Decimal
+  valuta             String
+  status             TransactionStatus @default(PROCESS)
+  type               TransactionType
+
+  @@map("transactions")
+}
+
+enum TransactionStatus {
+  PROCESS
+  PROCESSED
+  ERROR
+}
+
+enum TransactionType {
+  PAYMENT
+  WITHDRAWAL
+  TRANSACTION
+  LOAN
+  TRANSFER
+}

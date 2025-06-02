@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (UserResponse);
+  rpc GetUserById (GetUserByIdRequest) returns (UserResponse);
+  rpc GetUserByEmail (GetUserByEmailRequest) returns (UserResponse);
+}
+
+message CreateUserRequest {
+  optional string id = 1;
+  string email = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string dateOfBirth = 5;
+  string passportNumber = 6;
+  string password = 7;
+  string telephoneNumber = 8;
+  string address = 9;
+  string avatar = 10;
+  bool isVerified = 11;
+  optional string googleId = 12;
+}
+
+message UserResponse {
+  string id = 1;
+  string email = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string dateOfBirth = 5;
+  string passportNumber = 6;
+  string password = 7;
+  string telephoneNumber = 8;
+  string address = 9;
+  string avatar = 10;  
+  bool isVerified = 11;
+  string googleId = 12;
+  string role = 13;
+  string chatId = 14;
+  string lastChangePassword = 15;
+}
+
+message GetUserByIdRequest {
+  string id = 1;
+}
+
+message GetUserByEmailRequest {
+  string email = 1;
+}
