@@ -61,7 +61,6 @@ export class AuthController {
     @Post("/logout")
     @HttpCode(HttpStatus.OK)
     async logout(@Req() req: Request, @Res() res: Response) {
-        console.log("Request: ", req);
         await this.authService.logout(req, res);
         res.send({ message: "Logged out successfully" });
     }

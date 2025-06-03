@@ -36,4 +36,21 @@ export class TransactionsService {
 
         return transaction;
     }
+
+    public async transactions(numbersCards: string[]) {
+        const data = await this.prismaService.transactions.findMany({
+            where: {
+                OR: [
+                    { senderCardNumber: { in: numbersCards } },
+                    { receivedCardNumber: { in: numbersCards } },
+                ],
+            },
+            orderBy: { id: "desc" },
+        });
+
+        return data.map((tx) => ({
+            ...tx,
+            id: tx.id.toString(),
+        }));
+    }
 }

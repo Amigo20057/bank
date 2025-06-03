@@ -44,6 +44,8 @@ export class GatewayController {
                 targetUrl = "http://localhost:4000" + req.url;
             } else if (req.url.startsWith("/card")) {
                 targetUrl = "http://localhost:6000" + req.url;
+            } else if (req.url.startsWith("/transactions")) {
+                targetUrl = "http://localhost:7001" + req.url;
             } else {
                 return res.status(404).send("Service not found");
             }
