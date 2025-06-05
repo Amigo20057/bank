@@ -122,12 +122,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.TransactionsScalarFieldEnum = {
   id: 'id',
-  receivedCardNumber: 'receivedCardNumber',
+  recipientCardNumber: 'recipientCardNumber',
   senderCardNumber: 'senderCardNumber',
   amount: 'amount',
   valuta: 'valuta',
   status: 'status',
-  type: 'type'
+  type: 'type',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {

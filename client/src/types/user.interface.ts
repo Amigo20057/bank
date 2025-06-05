@@ -16,6 +16,7 @@ export interface IUser {
 	lastChangePassword?: Date;
 	createdAt?: Date;
 	updatedAt?: Date;
+	isEmailSubscribed?: boolean;
 }
 
 export interface IUserLogin {

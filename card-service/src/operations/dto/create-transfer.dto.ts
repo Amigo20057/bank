@@ -2,7 +2,7 @@ import { IsNumber, IsString } from "class-validator";
 
 export class CreateTransferDto {
     @IsString()
-    receivedCardNumber: string;
+    recipientCardNumber: string;
 
     @IsString()
     senderCardNumber: string;

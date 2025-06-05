@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Post, Query } from "@nestjs/common";
 import { GrpcMethod, RpcException } from "@nestjs/microservices";
 import { CreateTransactionDto } from "./dto/create-transaction.dto";
 import { TransactionsService } from "./transactions.service";
@@ -18,7 +18,13 @@ export class TransactionsController {
     }
 
     @Post()
-    public async transactions(@Body() body: { numbersCards: string[] }) {
-        return await this.transactionsService.transactions(body.numbersCards);
+    public async transactions(
+        @Body() body: { numbersCards: string[] },
+        @Query("limit") limit?: string,
+    ) {
+        return await this.transactionsService.transactions(
+            body.numbersCards,
+            limit,
+        );
     }
 }

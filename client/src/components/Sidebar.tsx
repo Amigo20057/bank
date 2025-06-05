@@ -1,7 +1,6 @@
 import {
 	Banknote,
 	Bell,
-	CreditCard,
 	LayoutDashboard,
 	LogOut,
 	Receipt,
@@ -14,7 +13,6 @@ import { useLogout } from "../hooks/user/mutations/useLogout";
 
 const menuItems = [
 	{ label: "Dashboard", icon: LayoutDashboard, path: "/" },
-	{ label: "Cards", icon: CreditCard, path: "/cards" },
 	{ label: "Transactions", icon: Receipt, path: "/transactions" },
 	{ label: "Transfers", icon: Repeat, path: "/transfers" },
 	{ label: "Loans", icon: Banknote, path: "/loans" },
@@ -23,7 +21,7 @@ const menuItems = [
 const accountItems = [
 	{ label: "Profile", icon: User, path: "/profile" },
 	{ label: "Notifications", icon: Bell, path: "/notifications" },
-	{ label: "Security & Access", icon: Shield, path: "/security" },
+	{ label: "Security & Settings", icon: Shield, path: "/security" },
 ];
 
 export const Sidebar = () => {

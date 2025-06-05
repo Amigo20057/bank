@@ -19,7 +19,7 @@ export class OperationsService {
         dto: CreateTransferDto,
     ): Promise<{ success: boolean }> {
         const {
-            receivedCardNumber,
+            recipientCardNumber,
             senderCardNumber,
             amount,
             cvvCode,
@@ -27,7 +27,7 @@ export class OperationsService {
         } = dto;
 
         const receivedCard =
-            await this.cardService.findCardByNumberCard(receivedCardNumber);
+            await this.cardService.findCardByNumberCard(recipientCardNumber);
         const senderCard =
             await this.cardService.findCardByNumberCard(senderCardNumber);
 
@@ -59,7 +59,7 @@ export class OperationsService {
             ]);
 
         const transaction = {
-            receivedCardNumber,
+            recipientCardNumber,
             senderCardNumber,
             amount,
             valuta,

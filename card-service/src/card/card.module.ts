@@ -2,6 +2,8 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
+import { OperationsModule } from "src/operations/operations.module";
+import { OperationsService } from "src/operations/operations.service";
 import { CardController } from "./card.controller";
 import { CardService } from "./card.service";
 
@@ -17,9 +19,10 @@ import { CardService } from "./card.service";
                 signOptions: { expiresIn: "1h" },
             }),
         }),
+        OperationsModule,
     ],
     controllers: [CardController],
-    providers: [CardService, JwtAuthGuard],
+    providers: [CardService, JwtAuthGuard, OperationsService],
     exports: [CardModule],
 })
 export class CardModule {}

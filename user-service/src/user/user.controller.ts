@@ -76,6 +76,19 @@ export class UserController {
         @Body() data: { oldPassword: string; newPassword: string },
     ) {}
 
+    @Patch("/changeFullName")
+    @UseGuards(JwtAuthGuard)
+    public async changeFullName(
+        @Req() req: Request,
+        @Body() data: { firstName: string; lastName: string; password: string },
+    ) {
+        return this.userService.changeFullName(
+            req["email"],
+            req["token"],
+            data,
+        );
+    }
+
     // @Patch("/reset-password")
     // public async resetPassword(
     //     @Body("email") email: string,

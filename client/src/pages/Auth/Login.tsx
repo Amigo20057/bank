@@ -48,7 +48,6 @@ export const Login = () => {
 
 	return (
 		<div className="w-full h-screen p-6 bg-gradient-to-br from-[#1f2937] via-[#111827] to-black text-white flex justify-center items-center relative overflow-hidden">
-			{/* Spinner */}
 			{loginMutation.status === "pending" && (
 				<div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9999] flex items-center justify-center">
 					<div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" />

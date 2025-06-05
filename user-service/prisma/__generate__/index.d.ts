@@ -1197,7 +1197,7 @@ export namespace Prisma {
     role: $Enums.Role
     isVerified: boolean
     chatId: string | null
-    lastChangePassword: Date | null
+    lastChangePassword: Date
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1319,7 +1319,7 @@ export namespace Prisma {
       role: $Enums.Role
       isVerified: boolean
       chatId: string | null
-      lastChangePassword: Date | null
+      lastChangePassword: Date
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -3270,7 +3270,7 @@ export namespace Prisma {
     role?: EnumRoleFilter<"User"> | $Enums.Role
     isVerified?: BoolFilter<"User"> | boolean
     chatId?: StringNullableFilter<"User"> | string | null
-    lastChangePassword?: DateTimeNullableFilter<"User"> | Date | string | null
+    lastChangePassword?: DateTimeFilter<"User"> | Date | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
   }
@@ -3290,7 +3290,7 @@ export namespace Prisma {
     role?: SortOrder
     isVerified?: SortOrder
     chatId?: SortOrderInput | SortOrder
-    lastChangePassword?: SortOrderInput | SortOrder
+    lastChangePassword?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3313,7 +3313,7 @@ export namespace Prisma {
     googleId?: StringNullableFilter<"User"> | string | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     isVerified?: BoolFilter<"User"> | boolean
-    lastChangePassword?: DateTimeNullableFilter<"User"> | Date | string | null
+    lastChangePassword?: DateTimeFilter<"User"> | Date | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
   }, "id" | "email" | "chatId">
@@ -3333,7 +3333,7 @@ export namespace Prisma {
     role?: SortOrder
     isVerified?: SortOrder
     chatId?: SortOrderInput | SortOrder
-    lastChangePassword?: SortOrderInput | SortOrder
+    lastChangePassword?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -3359,7 +3359,7 @@ export namespace Prisma {
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     isVerified?: BoolWithAggregatesFilter<"User"> | boolean
     chatId?: StringNullableWithAggregatesFilter<"User"> | string | null
-    lastChangePassword?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    lastChangePassword?: DateTimeWithAggregatesFilter<"User"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -3426,7 +3426,7 @@ export namespace Prisma {
     role?: $Enums.Role
     isVerified?: boolean
     chatId?: string | null
-    lastChangePassword?: Date | string | null
+    lastChangePassword?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3446,7 +3446,7 @@ export namespace Prisma {
     role?: $Enums.Role
     isVerified?: boolean
     chatId?: string | null
-    lastChangePassword?: Date | string | null
+    lastChangePassword?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3466,7 +3466,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
-    lastChangePassword?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastChangePassword?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3486,7 +3486,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
-    lastChangePassword?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastChangePassword?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3506,7 +3506,7 @@ export namespace Prisma {
     role?: $Enums.Role
     isVerified?: boolean
     chatId?: string | null
-    lastChangePassword?: Date | string | null
+    lastChangePassword?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3526,7 +3526,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
-    lastChangePassword?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastChangePassword?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3546,7 +3546,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
-    lastChangePassword?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastChangePassword?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

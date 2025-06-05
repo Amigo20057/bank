@@ -3,7 +3,9 @@ import {
     Inject,
     Injectable,
     NotFoundException,
+    UnauthorizedException,
 } from "@nestjs/common";
+import { verify } from "argon2";
 import { randomInt } from "crypto";
 import Redis from "ioredis";
 import { User } from "prisma/__generate__";
@@ -172,5 +174,37 @@ export class UserService {
             where: { email: user.email },
         });
         return true;
+    }
+
+    public async changeFullName(
+        email: string,
+        token: string,
+        data: { firstName: string; lastName: string; password: string },
+    ): Promise<void> {
+        const user = await this.prisma.user.findUnique({ where: { email } });
+
+        if (!user) {
+            throw new NotFoundException("User not found");
+        }
+
+        const isPasswordValid = await verify(user.password, data.password);
+        if (!isPasswordValid) {
+            throw new UnauthorizedException("Incorrect password");
+        }
+
+        const updatedUser = await this.prisma.user.update({
+            where: { email },
+            data: {
+                firstName: data.firstName,
+                lastName: data.lastName,
+            },
+        });
+
+        await this.redisClient.set(
+            token,
+            JSON.stringify(updatedUser),
+            "EX",
+            60 * 15,
+        );
     }
 }

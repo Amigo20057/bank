@@ -7,7 +7,7 @@ service TransactionService {
 }
 
 message CreateTransactionRequest {
-  string receivedCardNumber = 1;
+  string recipientCardNumber = 1;
   string senderCardNumber = 2;
   double amount = 3;
   string valuta = 4;

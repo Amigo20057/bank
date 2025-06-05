@@ -926,32 +926,35 @@ export namespace Prisma {
 
   export type TransactionsMinAggregateOutputType = {
     id: bigint | null
-    receivedCardNumber: string | null
+    recipientCardNumber: string | null
     senderCardNumber: string | null
     amount: Decimal | null
     valuta: string | null
     status: $Enums.TransactionStatus | null
     type: $Enums.TransactionType | null
+    createdAt: Date | null
   }
 
   export type TransactionsMaxAggregateOutputType = {
     id: bigint | null
-    receivedCardNumber: string | null
+    recipientCardNumber: string | null
     senderCardNumber: string | null
     amount: Decimal | null
     valuta: string | null
     status: $Enums.TransactionStatus | null
     type: $Enums.TransactionType | null
+    createdAt: Date | null
   }
 
   export type TransactionsCountAggregateOutputType = {
     id: number
-    receivedCardNumber: number
+    recipientCardNumber: number
     senderCardNumber: number
     amount: number
     valuta: number
     status: number
     type: number
+    createdAt: number
     _all: number
   }
 
@@ -968,32 +971,35 @@ export namespace Prisma {
 
   export type TransactionsMinAggregateInputType = {
     id?: true
-    receivedCardNumber?: true
+    recipientCardNumber?: true
     senderCardNumber?: true
     amount?: true
     valuta?: true
     status?: true
     type?: true
+    createdAt?: true
   }
 
   export type TransactionsMaxAggregateInputType = {
     id?: true
-    receivedCardNumber?: true
+    recipientCardNumber?: true
     senderCardNumber?: true
     amount?: true
     valuta?: true
     status?: true
     type?: true
+    createdAt?: true
   }
 
   export type TransactionsCountAggregateInputType = {
     id?: true
-    receivedCardNumber?: true
+    recipientCardNumber?: true
     senderCardNumber?: true
     amount?: true
     valuta?: true
     status?: true
     type?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -1085,12 +1091,13 @@ export namespace Prisma {
 
   export type TransactionsGroupByOutputType = {
     id: bigint
-    receivedCardNumber: string
+    recipientCardNumber: string
     senderCardNumber: string | null
     amount: Decimal
     valuta: string
     status: $Enums.TransactionStatus
     type: $Enums.TransactionType
+    createdAt: Date
     _count: TransactionsCountAggregateOutputType | null
     _avg: TransactionsAvgAggregateOutputType | null
     _sum: TransactionsSumAggregateOutputType | null
@@ -1114,57 +1121,62 @@ export namespace Prisma {
 
   export type TransactionsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    receivedCardNumber?: boolean
+    recipientCardNumber?: boolean
     senderCardNumber?: boolean
     amount?: boolean
     valuta?: boolean
     status?: boolean
     type?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["transactions"]>
 
   export type TransactionsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    receivedCardNumber?: boolean
+    recipientCardNumber?: boolean
     senderCardNumber?: boolean
     amount?: boolean
     valuta?: boolean
     status?: boolean
     type?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["transactions"]>
 
   export type TransactionsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    receivedCardNumber?: boolean
+    recipientCardNumber?: boolean
     senderCardNumber?: boolean
     amount?: boolean
     valuta?: boolean
     status?: boolean
     type?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["transactions"]>
 
   export type TransactionsSelectScalar = {
     id?: boolean
-    receivedCardNumber?: boolean
+    recipientCardNumber?: boolean
     senderCardNumber?: boolean
     amount?: boolean
     valuta?: boolean
     status?: boolean
     type?: boolean
+    createdAt?: boolean
   }
 
-  export type TransactionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "receivedCardNumber" | "senderCardNumber" | "amount" | "valuta" | "status" | "type", ExtArgs["result"]["transactions"]>
+  export type TransactionsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "recipientCardNumber" | "senderCardNumber" | "amount" | "valuta" | "status" | "type" | "createdAt", ExtArgs["result"]["transactions"]>
 
   export type $TransactionsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Transactions"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
-      receivedCardNumber: string
+      recipientCardNumber: string
       senderCardNumber: string | null
       amount: Prisma.Decimal
       valuta: string
       status: $Enums.TransactionStatus
       type: $Enums.TransactionType
+      createdAt: Date
     }, ExtArgs["result"]["transactions"]>
     composites: {}
   }
@@ -1589,12 +1601,13 @@ export namespace Prisma {
    */
   interface TransactionsFieldRefs {
     readonly id: FieldRef<"Transactions", 'BigInt'>
-    readonly receivedCardNumber: FieldRef<"Transactions", 'String'>
+    readonly recipientCardNumber: FieldRef<"Transactions", 'String'>
     readonly senderCardNumber: FieldRef<"Transactions", 'String'>
     readonly amount: FieldRef<"Transactions", 'Decimal'>
     readonly valuta: FieldRef<"Transactions", 'String'>
     readonly status: FieldRef<"Transactions", 'TransactionStatus'>
     readonly type: FieldRef<"Transactions", 'TransactionType'>
+    readonly createdAt: FieldRef<"Transactions", 'DateTime'>
   }
     
 
@@ -1977,12 +1990,13 @@ export namespace Prisma {
 
   export const TransactionsScalarFieldEnum: {
     id: 'id',
-    receivedCardNumber: 'receivedCardNumber',
+    recipientCardNumber: 'recipientCardNumber',
     senderCardNumber: 'senderCardNumber',
     amount: 'amount',
     valuta: 'valuta',
     status: 'status',
-    type: 'type'
+    type: 'type',
+    createdAt: 'createdAt'
   };
 
   export type TransactionsScalarFieldEnum = (typeof TransactionsScalarFieldEnum)[keyof typeof TransactionsScalarFieldEnum]
@@ -2088,6 +2102,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -2123,22 +2151,24 @@ export namespace Prisma {
     OR?: TransactionsWhereInput[]
     NOT?: TransactionsWhereInput | TransactionsWhereInput[]
     id?: BigIntFilter<"Transactions"> | bigint | number
-    receivedCardNumber?: StringFilter<"Transactions"> | string
+    recipientCardNumber?: StringFilter<"Transactions"> | string
     senderCardNumber?: StringNullableFilter<"Transactions"> | string | null
     amount?: DecimalFilter<"Transactions"> | Decimal | DecimalJsLike | number | string
     valuta?: StringFilter<"Transactions"> | string
     status?: EnumTransactionStatusFilter<"Transactions"> | $Enums.TransactionStatus
     type?: EnumTransactionTypeFilter<"Transactions"> | $Enums.TransactionType
+    createdAt?: DateTimeFilter<"Transactions"> | Date | string
   }
 
   export type TransactionsOrderByWithRelationInput = {
     id?: SortOrder
-    receivedCardNumber?: SortOrder
+    recipientCardNumber?: SortOrder
     senderCardNumber?: SortOrderInput | SortOrder
     amount?: SortOrder
     valuta?: SortOrder
     status?: SortOrder
     type?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type TransactionsWhereUniqueInput = Prisma.AtLeast<{
@@ -2146,22 +2176,24 @@ export namespace Prisma {
     AND?: TransactionsWhereInput | TransactionsWhereInput[]
     OR?: TransactionsWhereInput[]
     NOT?: TransactionsWhereInput | TransactionsWhereInput[]
-    receivedCardNumber?: StringFilter<"Transactions"> | string
+    recipientCardNumber?: StringFilter<"Transactions"> | string
     senderCardNumber?: StringNullableFilter<"Transactions"> | string | null
     amount?: DecimalFilter<"Transactions"> | Decimal | DecimalJsLike | number | string
     valuta?: StringFilter<"Transactions"> | string
     status?: EnumTransactionStatusFilter<"Transactions"> | $Enums.TransactionStatus
     type?: EnumTransactionTypeFilter<"Transactions"> | $Enums.TransactionType
+    createdAt?: DateTimeFilter<"Transactions"> | Date | string
   }, "id">
 
   export type TransactionsOrderByWithAggregationInput = {
     id?: SortOrder
-    receivedCardNumber?: SortOrder
+    recipientCardNumber?: SortOrder
     senderCardNumber?: SortOrderInput | SortOrder
     amount?: SortOrder
     valuta?: SortOrder
     status?: SortOrder
     type?: SortOrder
+    createdAt?: SortOrder
     _count?: TransactionsCountOrderByAggregateInput
     _avg?: TransactionsAvgOrderByAggregateInput
     _max?: TransactionsMaxOrderByAggregateInput
@@ -2174,82 +2206,90 @@ export namespace Prisma {
     OR?: TransactionsScalarWhereWithAggregatesInput[]
     NOT?: TransactionsScalarWhereWithAggregatesInput | TransactionsScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"Transactions"> | bigint | number
-    receivedCardNumber?: StringWithAggregatesFilter<"Transactions"> | string
+    recipientCardNumber?: StringWithAggregatesFilter<"Transactions"> | string
     senderCardNumber?: StringNullableWithAggregatesFilter<"Transactions"> | string | null
     amount?: DecimalWithAggregatesFilter<"Transactions"> | Decimal | DecimalJsLike | number | string
     valuta?: StringWithAggregatesFilter<"Transactions"> | string
     status?: EnumTransactionStatusWithAggregatesFilter<"Transactions"> | $Enums.TransactionStatus
     type?: EnumTransactionTypeWithAggregatesFilter<"Transactions"> | $Enums.TransactionType
+    createdAt?: DateTimeWithAggregatesFilter<"Transactions"> | Date | string
   }
 
   export type TransactionsCreateInput = {
     id?: bigint | number
-    receivedCardNumber: string
+    recipientCardNumber: string
     senderCardNumber?: string | null
     amount: Decimal | DecimalJsLike | number | string
     valuta: string
     status?: $Enums.TransactionStatus
     type: $Enums.TransactionType
+    createdAt?: Date | string
   }
 
   export type TransactionsUncheckedCreateInput = {
     id?: bigint | number
-    receivedCardNumber: string
+    recipientCardNumber: string
     senderCardNumber?: string | null
     amount: Decimal | DecimalJsLike | number | string
     valuta: string
     status?: $Enums.TransactionStatus
     type: $Enums.TransactionType
+    createdAt?: Date | string
   }
 
   export type TransactionsUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    receivedCardNumber?: StringFieldUpdateOperationsInput | string
+    recipientCardNumber?: StringFieldUpdateOperationsInput | string
     senderCardNumber?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valuta?: StringFieldUpdateOperationsInput | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
     type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TransactionsUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    receivedCardNumber?: StringFieldUpdateOperationsInput | string
+    recipientCardNumber?: StringFieldUpdateOperationsInput | string
     senderCardNumber?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valuta?: StringFieldUpdateOperationsInput | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
     type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TransactionsCreateManyInput = {
     id?: bigint | number
-    receivedCardNumber: string
+    recipientCardNumber: string
     senderCardNumber?: string | null
     amount: Decimal | DecimalJsLike | number | string
     valuta: string
     status?: $Enums.TransactionStatus
     type: $Enums.TransactionType
+    createdAt?: Date | string
   }
 
   export type TransactionsUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    receivedCardNumber?: StringFieldUpdateOperationsInput | string
+    recipientCardNumber?: StringFieldUpdateOperationsInput | string
     senderCardNumber?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valuta?: StringFieldUpdateOperationsInput | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
     type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TransactionsUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    receivedCardNumber?: StringFieldUpdateOperationsInput | string
+    recipientCardNumber?: StringFieldUpdateOperationsInput | string
     senderCardNumber?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valuta?: StringFieldUpdateOperationsInput | string
     status?: EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
     type?: EnumTransactionTypeFieldUpdateOperationsInput | $Enums.TransactionType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BigIntFilter<$PrismaModel = never> = {
@@ -2318,6 +2358,17 @@ export namespace Prisma {
     not?: NestedEnumTransactionTypeFilter<$PrismaModel> | $Enums.TransactionType
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -2325,12 +2376,13 @@ export namespace Prisma {
 
   export type TransactionsCountOrderByAggregateInput = {
     id?: SortOrder
-    receivedCardNumber?: SortOrder
+    recipientCardNumber?: SortOrder
     senderCardNumber?: SortOrder
     amount?: SortOrder
     valuta?: SortOrder
     status?: SortOrder
     type?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type TransactionsAvgOrderByAggregateInput = {
@@ -2340,22 +2392,24 @@ export namespace Prisma {
 
   export type TransactionsMaxOrderByAggregateInput = {
     id?: SortOrder
-    receivedCardNumber?: SortOrder
+    recipientCardNumber?: SortOrder
     senderCardNumber?: SortOrder
     amount?: SortOrder
     valuta?: SortOrder
     status?: SortOrder
     type?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type TransactionsMinOrderByAggregateInput = {
     id?: SortOrder
-    receivedCardNumber?: SortOrder
+    recipientCardNumber?: SortOrder
     senderCardNumber?: SortOrder
     amount?: SortOrder
     valuta?: SortOrder
     status?: SortOrder
     type?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type TransactionsSumOrderByAggregateInput = {
@@ -2451,6 +2505,20 @@ export namespace Prisma {
     _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type BigIntFieldUpdateOperationsInput = {
     set?: bigint | number
     increment?: bigint | number
@@ -2481,6 +2549,10 @@ export namespace Prisma {
 
   export type EnumTransactionTypeFieldUpdateOperationsInput = {
     set?: $Enums.TransactionType
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -2545,6 +2617,17 @@ export namespace Prisma {
     in?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.TransactionType[] | ListEnumTransactionTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumTransactionTypeFilter<$PrismaModel> | $Enums.TransactionType
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2664,6 +2747,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTransactionTypeFilter<$PrismaModel>
     _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
 

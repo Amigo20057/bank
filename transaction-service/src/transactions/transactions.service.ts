@@ -14,7 +14,7 @@ export class TransactionsService {
         const transaction = await this.prismaService.transactions.create({
             data: {
                 amount: dto.amount,
-                receivedCardNumber: dto.receivedCardNumber,
+                recipientCardNumber: dto.recipientCardNumber,
                 senderCardNumber: dto.senderCardNumber,
                 type: dto.transactionType,
                 valuta: dto.valuta,
@@ -25,7 +25,7 @@ export class TransactionsService {
             "transaction-exchange",
             "transaction.created",
             {
-                receivedCardNumber: transaction.receivedCardNumber,
+                recipientCardNumber: transaction.recipientCardNumber,
                 senderCardNumber: transaction.senderCardNumber,
                 amount: transaction.amount,
                 valuta: transaction.valuta,
@@ -37,15 +37,17 @@ export class TransactionsService {
         return transaction;
     }
 
-    public async transactions(numbersCards: string[]) {
+    public async transactions(numbersCards: string[], limit: string) {
+        const queryLimit = limit ? parseInt(limit) : undefined;
         const data = await this.prismaService.transactions.findMany({
             where: {
                 OR: [
                     { senderCardNumber: { in: numbersCards } },
-                    { receivedCardNumber: { in: numbersCards } },
+                    { recipientCardNumber: { in: numbersCards } },
                 ],
             },
             orderBy: { id: "desc" },
+            take: queryLimit,
         });
 
         return data.map((tx) => ({

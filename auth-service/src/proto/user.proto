@@ -39,6 +39,8 @@ message UserResponse {
   string role = 13;
   string chatId = 14;
   string lastChangePassword = 15;
+  string createdAt = 16;
+  string updatedAt = 17;
 }
 
 message GetUserByIdRequest {

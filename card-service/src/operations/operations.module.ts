@@ -21,5 +21,6 @@ import { TransactionClientService } from "./transaction.client";
     ],
     controllers: [OperationsController],
     providers: [OperationsService, TransactionClientService, CardService],
+    exports: [OperationsModule, TransactionClientService],
 })
 export class OperationsModule {}

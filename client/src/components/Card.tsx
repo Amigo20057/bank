@@ -64,7 +64,6 @@ export const Card = ({
 					isFlipped ? "rotate-y-180" : ""
 				}`}
 			>
-				{/* Front Side */}
 				<div
 					className="absolute w-full h-full text-white rounded-2xl shadow-2xl p-5 backface-hidden flex flex-col justify-between"
 					style={gradientStyle}
@@ -90,11 +89,11 @@ export const Card = ({
 					</button>
 
 					<div className="text-right font-bold text-2xl mt-2">
-						{balance} {valuta}
+						{valuta === "USD" ? "$" : "$"}
+						{Number(balance).toLocaleString("en-US")}{" "}
 					</div>
 				</div>
 
-				{/* Back Side */}
 				<div className="absolute w-full h-full bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 text-white rounded-2xl shadow-2xl p-5 rotate-y-180 backface-hidden flex flex-col justify-between">
 					<div className="text-sm">
 						<p className="opacity-70 mb-1">VALID THRU</p>
