@@ -39,13 +39,13 @@ export class GatewayController {
             let targetUrl = "";
 
             if (req.url.startsWith("/auth")) {
-                targetUrl = "http://localhost:5000" + req.url;
+                targetUrl = "http://185.25.117.206:5000" + req.url;
             } else if (req.url.startsWith("/user")) {
-                targetUrl = "http://localhost:4000" + req.url;
+                targetUrl = "http://185.25.117.206:4000" + req.url;
             } else if (req.url.startsWith("/card")) {
-                targetUrl = "http://localhost:6000" + req.url;
+                targetUrl = "http://185.25.117.206:6000" + req.url;
             } else if (req.url.startsWith("/transactions")) {
-                targetUrl = "http://localhost:7001" + req.url;
+                targetUrl = "http://185.25.117.206:7001" + req.url;
             } else {
                 return res.status(404).send("Service not found");
             }

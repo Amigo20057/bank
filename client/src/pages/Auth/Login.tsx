@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { MyButton } from "../../components/MyButton";
-import { MyInput } from "../../components/MyInput";
-import { MessageBox } from "../../components/UI/MessageBox";
-import { useLogin } from "../../hooks/user/mutations/useLogin";
-import type { IUserLogin } from "../../types/user.interface";
-import logoGoogle from "./assets/logoGoogle.png";
+import { useState } from "react"
+import { useForm, type SubmitHandler } from "react-hook-form"
+import { Link } from "react-router-dom"
+import { MyButton } from "../../components/MyButton"
+import { MyInput } from "../../components/MyInput"
+import { MessageBox } from "../../components/UI/MessageBox"
+import { useLogin } from "../../hooks/user/mutations/useLogin"
+import type { IUserLogin } from "../../types/user.interface"
+import logoGoogle from "./assets/logoGoogle.png"
 
 type Message = { id: string; text: string; status: "SUCCESS" | "ERROR" };
 
@@ -117,7 +117,7 @@ export const Login = () => {
 								<button
 									className="flex items-center justify-start gap-3 w-full h-[60px] rounded-xl bg-[#1a1a1a] text-white text-sm pl-5"
 									onClick={() =>
-										(window.location.href = `http://localhost:5000/auth/${provider.toLowerCase()}`)
+										(window.location.href = `http://185.25.117.206:5000/auth/${provider.toLowerCase()}`)
 									}
 								>
 									<img src={logoGoogle} className="w-5 h-5" alt={provider} />

@@ -36,7 +36,7 @@ export class AuthController {
         await this.authService.saveSessionToRedis(token, user);
 
         res.cookie("jwt", token, { httpOnly: true, sameSite: "lax" });
-        return res.redirect("http://localhost:5173");
+        return res.redirect("http://185.25.117.206:5173");
     }
 
     @Post("/register")
