@@ -57,7 +57,7 @@ export const PasswordChange = () => {
 							</p>
 						)}
 						<MyInput
-							type="text"
+							type="password"
 							placeholder="New Password"
 							{...register("newPassword", {
 								required: "This field is required",

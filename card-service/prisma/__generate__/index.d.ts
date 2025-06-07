@@ -2213,24 +2213,31 @@ export namespace Prisma {
   export type LoanAvgAggregateOutputType = {
     id: number | null
     amount: Decimal | null
-    interestRate: number | null
+    interestRate: Decimal | null
     termMonths: number | null
+    totalRepayment: Decimal | null
+    monthlyPayment: Decimal | null
     cardId: number | null
   }
 
   export type LoanSumAggregateOutputType = {
     id: bigint | null
     amount: Decimal | null
-    interestRate: number | null
+    interestRate: Decimal | null
     termMonths: number | null
+    totalRepayment: Decimal | null
+    monthlyPayment: Decimal | null
     cardId: bigint | null
   }
 
   export type LoanMinAggregateOutputType = {
     id: bigint | null
     amount: Decimal | null
-    interestRate: number | null
+    interestRate: Decimal | null
     termMonths: number | null
+    purpose: string | null
+    totalRepayment: Decimal | null
+    monthlyPayment: Decimal | null
     issueDate: Date | null
     status: $Enums.LoanStatus | null
     cardId: bigint | null
@@ -2239,8 +2246,11 @@ export namespace Prisma {
   export type LoanMaxAggregateOutputType = {
     id: bigint | null
     amount: Decimal | null
-    interestRate: number | null
+    interestRate: Decimal | null
     termMonths: number | null
+    purpose: string | null
+    totalRepayment: Decimal | null
+    monthlyPayment: Decimal | null
     issueDate: Date | null
     status: $Enums.LoanStatus | null
     cardId: bigint | null
@@ -2251,6 +2261,9 @@ export namespace Prisma {
     amount: number
     interestRate: number
     termMonths: number
+    purpose: number
+    totalRepayment: number
+    monthlyPayment: number
     issueDate: number
     status: number
     cardId: number
@@ -2263,6 +2276,8 @@ export namespace Prisma {
     amount?: true
     interestRate?: true
     termMonths?: true
+    totalRepayment?: true
+    monthlyPayment?: true
     cardId?: true
   }
 
@@ -2271,6 +2286,8 @@ export namespace Prisma {
     amount?: true
     interestRate?: true
     termMonths?: true
+    totalRepayment?: true
+    monthlyPayment?: true
     cardId?: true
   }
 
@@ -2279,6 +2296,9 @@ export namespace Prisma {
     amount?: true
     interestRate?: true
     termMonths?: true
+    purpose?: true
+    totalRepayment?: true
+    monthlyPayment?: true
     issueDate?: true
     status?: true
     cardId?: true
@@ -2289,6 +2309,9 @@ export namespace Prisma {
     amount?: true
     interestRate?: true
     termMonths?: true
+    purpose?: true
+    totalRepayment?: true
+    monthlyPayment?: true
     issueDate?: true
     status?: true
     cardId?: true
@@ -2299,6 +2322,9 @@ export namespace Prisma {
     amount?: true
     interestRate?: true
     termMonths?: true
+    purpose?: true
+    totalRepayment?: true
+    monthlyPayment?: true
     issueDate?: true
     status?: true
     cardId?: true
@@ -2394,8 +2420,11 @@ export namespace Prisma {
   export type LoanGroupByOutputType = {
     id: bigint
     amount: Decimal
-    interestRate: number
+    interestRate: Decimal
     termMonths: number
+    purpose: string | null
+    totalRepayment: Decimal
+    monthlyPayment: Decimal
     issueDate: Date
     status: $Enums.LoanStatus
     cardId: bigint
@@ -2425,6 +2454,9 @@ export namespace Prisma {
     amount?: boolean
     interestRate?: boolean
     termMonths?: boolean
+    purpose?: boolean
+    totalRepayment?: boolean
+    monthlyPayment?: boolean
     issueDate?: boolean
     status?: boolean
     cardId?: boolean
@@ -2436,6 +2468,9 @@ export namespace Prisma {
     amount?: boolean
     interestRate?: boolean
     termMonths?: boolean
+    purpose?: boolean
+    totalRepayment?: boolean
+    monthlyPayment?: boolean
     issueDate?: boolean
     status?: boolean
     cardId?: boolean
@@ -2447,6 +2482,9 @@ export namespace Prisma {
     amount?: boolean
     interestRate?: boolean
     termMonths?: boolean
+    purpose?: boolean
+    totalRepayment?: boolean
+    monthlyPayment?: boolean
     issueDate?: boolean
     status?: boolean
     cardId?: boolean
@@ -2458,12 +2496,15 @@ export namespace Prisma {
     amount?: boolean
     interestRate?: boolean
     termMonths?: boolean
+    purpose?: boolean
+    totalRepayment?: boolean
+    monthlyPayment?: boolean
     issueDate?: boolean
     status?: boolean
     cardId?: boolean
   }
 
-  export type LoanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "interestRate" | "termMonths" | "issueDate" | "status" | "cardId", ExtArgs["result"]["loan"]>
+  export type LoanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount" | "interestRate" | "termMonths" | "purpose" | "totalRepayment" | "monthlyPayment" | "issueDate" | "status" | "cardId", ExtArgs["result"]["loan"]>
   export type LoanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     card?: boolean | CardDefaultArgs<ExtArgs>
   }
@@ -2482,8 +2523,11 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
       amount: Prisma.Decimal
-      interestRate: number
+      interestRate: Prisma.Decimal
       termMonths: number
+      purpose: string | null
+      totalRepayment: Prisma.Decimal
+      monthlyPayment: Prisma.Decimal
       issueDate: Date
       status: $Enums.LoanStatus
       cardId: bigint
@@ -2913,8 +2957,11 @@ export namespace Prisma {
   interface LoanFieldRefs {
     readonly id: FieldRef<"Loan", 'BigInt'>
     readonly amount: FieldRef<"Loan", 'Decimal'>
-    readonly interestRate: FieldRef<"Loan", 'Float'>
+    readonly interestRate: FieldRef<"Loan", 'Decimal'>
     readonly termMonths: FieldRef<"Loan", 'Int'>
+    readonly purpose: FieldRef<"Loan", 'String'>
+    readonly totalRepayment: FieldRef<"Loan", 'Decimal'>
+    readonly monthlyPayment: FieldRef<"Loan", 'Decimal'>
     readonly issueDate: FieldRef<"Loan", 'DateTime'>
     readonly status: FieldRef<"Loan", 'LoanStatus'>
     readonly cardId: FieldRef<"Loan", 'BigInt'>
@@ -3367,6 +3414,9 @@ export namespace Prisma {
     amount: 'amount',
     interestRate: 'interestRate',
     termMonths: 'termMonths',
+    purpose: 'purpose',
+    totalRepayment: 'totalRepayment',
+    monthlyPayment: 'monthlyPayment',
     issueDate: 'issueDate',
     status: 'status',
     cardId: 'cardId'
@@ -3389,6 +3439,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -3481,20 +3539,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
    * Reference to a field of type 'LoanStatus'
    */
   export type EnumLoanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanStatus'>
@@ -3505,6 +3549,20 @@ export namespace Prisma {
    * Reference to a field of type 'LoanStatus[]'
    */
   export type ListEnumLoanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -3599,8 +3657,11 @@ export namespace Prisma {
     NOT?: LoanWhereInput | LoanWhereInput[]
     id?: BigIntFilter<"Loan"> | bigint | number
     amount?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatFilter<"Loan"> | number
+    interestRate?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
     termMonths?: IntFilter<"Loan"> | number
+    purpose?: StringNullableFilter<"Loan"> | string | null
+    totalRepayment?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeFilter<"Loan"> | Date | string
     status?: EnumLoanStatusFilter<"Loan"> | $Enums.LoanStatus
     cardId?: BigIntFilter<"Loan"> | bigint | number
@@ -3612,6 +3673,9 @@ export namespace Prisma {
     amount?: SortOrder
     interestRate?: SortOrder
     termMonths?: SortOrder
+    purpose?: SortOrderInput | SortOrder
+    totalRepayment?: SortOrder
+    monthlyPayment?: SortOrder
     issueDate?: SortOrder
     status?: SortOrder
     cardId?: SortOrder
@@ -3624,8 +3688,11 @@ export namespace Prisma {
     OR?: LoanWhereInput[]
     NOT?: LoanWhereInput | LoanWhereInput[]
     amount?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatFilter<"Loan"> | number
+    interestRate?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
     termMonths?: IntFilter<"Loan"> | number
+    purpose?: StringNullableFilter<"Loan"> | string | null
+    totalRepayment?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeFilter<"Loan"> | Date | string
     status?: EnumLoanStatusFilter<"Loan"> | $Enums.LoanStatus
     cardId?: BigIntFilter<"Loan"> | bigint | number
@@ -3637,6 +3704,9 @@ export namespace Prisma {
     amount?: SortOrder
     interestRate?: SortOrder
     termMonths?: SortOrder
+    purpose?: SortOrderInput | SortOrder
+    totalRepayment?: SortOrder
+    monthlyPayment?: SortOrder
     issueDate?: SortOrder
     status?: SortOrder
     cardId?: SortOrder
@@ -3653,8 +3723,11 @@ export namespace Prisma {
     NOT?: LoanScalarWhereWithAggregatesInput | LoanScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"Loan"> | bigint | number
     amount?: DecimalWithAggregatesFilter<"Loan"> | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatWithAggregatesFilter<"Loan"> | number
+    interestRate?: DecimalWithAggregatesFilter<"Loan"> | Decimal | DecimalJsLike | number | string
     termMonths?: IntWithAggregatesFilter<"Loan"> | number
+    purpose?: StringNullableWithAggregatesFilter<"Loan"> | string | null
+    totalRepayment?: DecimalWithAggregatesFilter<"Loan"> | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalWithAggregatesFilter<"Loan"> | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeWithAggregatesFilter<"Loan"> | Date | string
     status?: EnumLoanStatusWithAggregatesFilter<"Loan"> | $Enums.LoanStatus
     cardId?: BigIntWithAggregatesFilter<"Loan"> | bigint | number
@@ -3758,8 +3831,11 @@ export namespace Prisma {
   export type LoanCreateInput = {
     id?: bigint | number
     amount: Decimal | DecimalJsLike | number | string
-    interestRate: number
+    interestRate: Decimal | DecimalJsLike | number | string
     termMonths: number
+    purpose?: string | null
+    totalRepayment?: Decimal | DecimalJsLike | number | string
+    monthlyPayment?: Decimal | DecimalJsLike | number | string
     issueDate?: Date | string
     status?: $Enums.LoanStatus
     card: CardCreateNestedOneWithoutLoanInput
@@ -3768,8 +3844,11 @@ export namespace Prisma {
   export type LoanUncheckedCreateInput = {
     id?: bigint | number
     amount: Decimal | DecimalJsLike | number | string
-    interestRate: number
+    interestRate: Decimal | DecimalJsLike | number | string
     termMonths: number
+    purpose?: string | null
+    totalRepayment?: Decimal | DecimalJsLike | number | string
+    monthlyPayment?: Decimal | DecimalJsLike | number | string
     issueDate?: Date | string
     status?: $Enums.LoanStatus
     cardId: bigint | number
@@ -3778,8 +3857,11 @@ export namespace Prisma {
   export type LoanUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatFieldUpdateOperationsInput | number
+    interestRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     termMonths?: IntFieldUpdateOperationsInput | number
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    totalRepayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumLoanStatusFieldUpdateOperationsInput | $Enums.LoanStatus
     card?: CardUpdateOneRequiredWithoutLoanNestedInput
@@ -3788,8 +3870,11 @@ export namespace Prisma {
   export type LoanUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatFieldUpdateOperationsInput | number
+    interestRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     termMonths?: IntFieldUpdateOperationsInput | number
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    totalRepayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumLoanStatusFieldUpdateOperationsInput | $Enums.LoanStatus
     cardId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -3798,8 +3883,11 @@ export namespace Prisma {
   export type LoanCreateManyInput = {
     id?: bigint | number
     amount: Decimal | DecimalJsLike | number | string
-    interestRate: number
+    interestRate: Decimal | DecimalJsLike | number | string
     termMonths: number
+    purpose?: string | null
+    totalRepayment?: Decimal | DecimalJsLike | number | string
+    monthlyPayment?: Decimal | DecimalJsLike | number | string
     issueDate?: Date | string
     status?: $Enums.LoanStatus
     cardId: bigint | number
@@ -3808,8 +3896,11 @@ export namespace Prisma {
   export type LoanUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatFieldUpdateOperationsInput | number
+    interestRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     termMonths?: IntFieldUpdateOperationsInput | number
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    totalRepayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumLoanStatusFieldUpdateOperationsInput | $Enums.LoanStatus
   }
@@ -3817,8 +3908,11 @@ export namespace Prisma {
   export type LoanUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatFieldUpdateOperationsInput | number
+    interestRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     termMonths?: IntFieldUpdateOperationsInput | number
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    totalRepayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumLoanStatusFieldUpdateOperationsInput | $Enums.LoanStatus
     cardId?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -4041,15 +4135,19 @@ export namespace Prisma {
     _max?: NestedEnumStatusCardFilter<$PrismaModel>
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type EnumLoanStatusFilter<$PrismaModel = never> = {
@@ -4064,11 +4162,19 @@ export namespace Prisma {
     isNot?: CardWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type LoanCountOrderByAggregateInput = {
     id?: SortOrder
     amount?: SortOrder
     interestRate?: SortOrder
     termMonths?: SortOrder
+    purpose?: SortOrder
+    totalRepayment?: SortOrder
+    monthlyPayment?: SortOrder
     issueDate?: SortOrder
     status?: SortOrder
     cardId?: SortOrder
@@ -4079,6 +4185,8 @@ export namespace Prisma {
     amount?: SortOrder
     interestRate?: SortOrder
     termMonths?: SortOrder
+    totalRepayment?: SortOrder
+    monthlyPayment?: SortOrder
     cardId?: SortOrder
   }
 
@@ -4087,6 +4195,9 @@ export namespace Prisma {
     amount?: SortOrder
     interestRate?: SortOrder
     termMonths?: SortOrder
+    purpose?: SortOrder
+    totalRepayment?: SortOrder
+    monthlyPayment?: SortOrder
     issueDate?: SortOrder
     status?: SortOrder
     cardId?: SortOrder
@@ -4097,6 +4208,9 @@ export namespace Prisma {
     amount?: SortOrder
     interestRate?: SortOrder
     termMonths?: SortOrder
+    purpose?: SortOrder
+    totalRepayment?: SortOrder
+    monthlyPayment?: SortOrder
     issueDate?: SortOrder
     status?: SortOrder
     cardId?: SortOrder
@@ -4107,23 +4221,27 @@ export namespace Prisma {
     amount?: SortOrder
     interestRate?: SortOrder
     termMonths?: SortOrder
+    totalRepayment?: SortOrder
+    monthlyPayment?: SortOrder
     cardId?: SortOrder
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type EnumLoanStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -4220,12 +4338,8 @@ export namespace Prisma {
     connect?: CardWhereUniqueInput
   }
 
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type EnumLoanStatusFieldUpdateOperationsInput = {
@@ -4405,6 +4519,20 @@ export namespace Prisma {
     _max?: NestedEnumStatusCardFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedEnumLoanStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.LoanStatus | EnumLoanStatusFieldRefInput<$PrismaModel>
     in?: $Enums.LoanStatus[] | ListEnumLoanStatusFieldRefInput<$PrismaModel>
@@ -4412,20 +4540,32 @@ export namespace Prisma {
     not?: NestedEnumLoanStatusFilter<$PrismaModel> | $Enums.LoanStatus
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumLoanStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -4441,8 +4581,11 @@ export namespace Prisma {
   export type LoanCreateWithoutCardInput = {
     id?: bigint | number
     amount: Decimal | DecimalJsLike | number | string
-    interestRate: number
+    interestRate: Decimal | DecimalJsLike | number | string
     termMonths: number
+    purpose?: string | null
+    totalRepayment?: Decimal | DecimalJsLike | number | string
+    monthlyPayment?: Decimal | DecimalJsLike | number | string
     issueDate?: Date | string
     status?: $Enums.LoanStatus
   }
@@ -4450,8 +4593,11 @@ export namespace Prisma {
   export type LoanUncheckedCreateWithoutCardInput = {
     id?: bigint | number
     amount: Decimal | DecimalJsLike | number | string
-    interestRate: number
+    interestRate: Decimal | DecimalJsLike | number | string
     termMonths: number
+    purpose?: string | null
+    totalRepayment?: Decimal | DecimalJsLike | number | string
+    monthlyPayment?: Decimal | DecimalJsLike | number | string
     issueDate?: Date | string
     status?: $Enums.LoanStatus
   }
@@ -4488,8 +4634,11 @@ export namespace Prisma {
     NOT?: LoanScalarWhereInput | LoanScalarWhereInput[]
     id?: BigIntFilter<"Loan"> | bigint | number
     amount?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatFilter<"Loan"> | number
+    interestRate?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
     termMonths?: IntFilter<"Loan"> | number
+    purpose?: StringNullableFilter<"Loan"> | string | null
+    totalRepayment?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalFilter<"Loan"> | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeFilter<"Loan"> | Date | string
     status?: EnumLoanStatusFilter<"Loan"> | $Enums.LoanStatus
     cardId?: BigIntFilter<"Loan"> | bigint | number
@@ -4566,8 +4715,11 @@ export namespace Prisma {
   export type LoanCreateManyCardInput = {
     id?: bigint | number
     amount: Decimal | DecimalJsLike | number | string
-    interestRate: number
+    interestRate: Decimal | DecimalJsLike | number | string
     termMonths: number
+    purpose?: string | null
+    totalRepayment?: Decimal | DecimalJsLike | number | string
+    monthlyPayment?: Decimal | DecimalJsLike | number | string
     issueDate?: Date | string
     status?: $Enums.LoanStatus
   }
@@ -4575,8 +4727,11 @@ export namespace Prisma {
   export type LoanUpdateWithoutCardInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatFieldUpdateOperationsInput | number
+    interestRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     termMonths?: IntFieldUpdateOperationsInput | number
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    totalRepayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumLoanStatusFieldUpdateOperationsInput | $Enums.LoanStatus
   }
@@ -4584,8 +4739,11 @@ export namespace Prisma {
   export type LoanUncheckedUpdateWithoutCardInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatFieldUpdateOperationsInput | number
+    interestRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     termMonths?: IntFieldUpdateOperationsInput | number
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    totalRepayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumLoanStatusFieldUpdateOperationsInput | $Enums.LoanStatus
   }
@@ -4593,8 +4751,11 @@ export namespace Prisma {
   export type LoanUncheckedUpdateManyWithoutCardInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    interestRate?: FloatFieldUpdateOperationsInput | number
+    interestRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     termMonths?: IntFieldUpdateOperationsInput | number
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    totalRepayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    monthlyPayment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumLoanStatusFieldUpdateOperationsInput | $Enums.LoanStatus
   }

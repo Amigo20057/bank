@@ -66,22 +66,17 @@ export class UserController {
         if (!isValid) {
             return false;
         }
-        await this.userService.verifiedUser(req["id"]);
+        await this.userService.verifiedUser(req["id"], req["token"]);
         return { success: true };
     }
 
-    @Patch("/change-password")
-    @UseGuards(JwtAuthGuard)
-    public async changePassword(
-        @Body() data: { oldPassword: string; newPassword: string },
-    ) {}
-
-    @Patch("/changeFullName")
+    @Patch("/change-full-name")
     @UseGuards(JwtAuthGuard)
     public async changeFullName(
         @Req() req: Request,
         @Body() data: { firstName: string; lastName: string; password: string },
     ) {
+        console.log(data);
         return this.userService.changeFullName(
             req["email"],
             req["token"],
@@ -89,17 +84,73 @@ export class UserController {
         );
     }
 
-    // @Patch("/reset-password")
-    // public async resetPassword(
-    //     @Body("email") email: string,
-    //     @Res() res: Response,
-    // ) {
-    //     const code = await this.userService.generateCode(email);
-    //     const verify = await this.userService.resetPassword(email, code);
-    //     if (verify) {
-    //         res.redirect("http://localhost:5173/auth/change-password");
-    //     } else {
-    //         res.status(500).json({ message: "Error reset password" });
-    //     }
-    // }
+    @Patch("/change-phone-number")
+    @UseGuards(JwtAuthGuard)
+    public async changePhoneNumber(
+        @Req() req: Request,
+        @Body() data: { newPhoneNumber: string; password: string },
+    ) {
+        return this.userService.changePhoneNumber(
+            req["email"],
+            req["token"],
+            data,
+        );
+    }
+
+    @Patch("/change-address")
+    @UseGuards(JwtAuthGuard)
+    public async changeAddress(
+        @Req() req: Request,
+        @Body() data: { newAddress: string; password: string },
+    ) {
+        return this.userService.changeAddress(req["email"], req["token"], data);
+    }
+
+    @Patch("/change-email")
+    @UseGuards(JwtAuthGuard)
+    public async changeEmail(
+        @Req() req: Request,
+        @Body() data: { newEmail: string; password: string },
+    ) {
+        return this.userService.changeEmail(req["email"], req["token"], data);
+    }
+
+    @Patch("/change-passport-number")
+    @UseGuards(JwtAuthGuard)
+    public async changePassportNumber(
+        @Req() req: Request,
+        @Body() data: { newPassportNumber: string; password: string },
+    ) {
+        return this.userService.changePassportNumber(
+            req["email"],
+            req["token"],
+            data,
+        );
+    }
+
+    @Patch("/change-password")
+    @UseGuards(JwtAuthGuard)
+    public async changePassword(
+        @Req() req: Request,
+        @Body() data: { oldPassword: string; newPassword: string },
+    ) {
+        return this.userService.changePassword(
+            req["email"],
+            req["token"],
+            data,
+        );
+    }
+
+    @Patch("/change-date-of-birth")
+    @UseGuards(JwtAuthGuard)
+    public async changeDateOfBirth(
+        @Req() req: Request,
+        @Body() data: { newDate: Date; password: string },
+    ) {
+        return this.userService.changeDateOfBirth(
+            req["email"],
+            req["token"],
+            data,
+        );
+    }
 }

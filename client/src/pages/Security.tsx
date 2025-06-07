@@ -1,4 +1,12 @@
-import { Lock, Mail, MapPin, Phone, User } from "lucide-react";
+import {
+	BookMarked,
+	Cake,
+	Lock,
+	Mail,
+	MapPin,
+	Phone,
+	User,
+} from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sidebar } from "../components/Sidebar";
@@ -79,26 +87,37 @@ export const Security = () => {
 								Change Address
 							</button>
 							<button
-								onClick={() => navigation("/settings/change-password")}
+								onClick={() => navigation("/settings/change-date-of-birth")}
 								className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-white font-medium"
 							>
-								<Lock className="w-4 h-4" />
-								Change Password
+								<Cake className="w-4 h-4" />
+								Change Date Of Birth
 							</button>
+							{!userProfileData?.googleId && (
+								<button
+									onClick={() => navigation("/settings/change-password")}
+									className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-white font-medium"
+								>
+									<Lock className="w-4 h-4" />
+									Change Password
+								</button>
+							)}
 							<button
 								onClick={() => navigation("/settings/change-passport-number")}
 								className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-white font-medium"
 							>
-								<Lock className="w-4 h-4" />
+								<BookMarked className="w-4 h-4" />
 								Passport Number
 							</button>
-							<button
-								onClick={() => navigation("/settings/change-email")}
-								className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-white font-medium"
-							>
-								<Mail className="w-4 h-4" />
-								Change Email
-							</button>
+							{!userProfileData?.googleId && (
+								<button
+									onClick={() => navigation("/settings/change-email")}
+									className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-white font-medium"
+								>
+									<Mail className="w-4 h-4" />
+									Change Email
+								</button>
+							)}
 						</div>
 					</div>
 
@@ -111,7 +130,10 @@ export const Security = () => {
 								<p className="text-red-400 mb-2">
 									Your account is not verified
 								</p>
-								<button className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded text-white font-medium">
+								<button
+									onClick={() => navigation("/settings/request-verification")}
+									className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded text-white font-medium"
+								>
 									Verify Account
 								</button>
 							</>
@@ -145,12 +167,15 @@ export const Security = () => {
 					</div>
 
 					<div className="bg-black/40 rounded-xl p-5 border border-white/10 shadow-inner col-span-1 lg:col-span-2">
-						<h3 className="text-lg font-semibold mb-3">Remove Bank Cards</h3>
+						<h3 className="text-lg font-semibold mb-3">Remove Bank Card</h3>
 						<p className="text-gray-400 mb-3">
-							This will permanently remove your saved bank cards.
+							This will permanently remove your saved bank card.
 						</p>
-						<button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white font-medium">
-							Delete All Cards
+						<button
+							onClick={() => navigation("/settings/delete-card")}
+							className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white font-medium"
+						>
+							Delete Card
 						</button>
 					</div>
 				</div>

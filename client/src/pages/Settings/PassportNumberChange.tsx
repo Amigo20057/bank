@@ -64,14 +64,22 @@ export const PassportNumberChange = () => {
 							})}
 						/>
 
-						{errors.password && (
-							<p className="text-red-500 text-xs">{errors.password.message}</p>
+						{!data?.googleId && (
+							<>
+								{errors.password && (
+									<p className="text-red-500 text-xs">
+										{errors.password.message}
+									</p>
+								)}
+								<MyInput
+									type="password"
+									placeholder="Password"
+									{...register("password", {
+										required: "Password is required",
+									})}
+								/>
+							</>
 						)}
-						<MyInput
-							type="password"
-							placeholder="Password"
-							{...register("password", { required: "Password is required" })}
-						/>
 
 						<MyButton
 							text="Change"

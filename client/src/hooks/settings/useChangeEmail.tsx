@@ -9,7 +9,7 @@ export const useChangeEmail = () => {
 	const changeEmailMutation = useMutation({
 		mutationFn: async (data: { newEmail: string; password: string }) => {
 			return await axios.patch(
-				`${import.meta.env.VITE_API_GATEWAY_URL}/user/changeEmail`,
+				`${import.meta.env.VITE_API_GATEWAY_URL}/user/change-email`,
 				data,
 				{ withCredentials: true }
 			);

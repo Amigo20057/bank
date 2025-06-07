@@ -9,7 +9,7 @@ export const useChangeAddress = () => {
 	const changeAddressMutation = useMutation({
 		mutationFn: async (data: { newAddress: string; password: string }) => {
 			return await axios.patch(
-				`${import.meta.env.VITE_API_GATEWAY_URL}/user/changeAddress`,
+				`${import.meta.env.VITE_API_GATEWAY_URL}/user/change-address`,
 				data,
 				{ withCredentials: true }
 			);

@@ -9,7 +9,7 @@ export const useChangePhoneNumber = () => {
 	const changePhoneNumberMutation = useMutation({
 		mutationFn: async (data: { newPhoneNumber: string; password: string }) => {
 			return await axios.patch(
-				`${import.meta.env.VITE_API_GATEWAY_URL}/user/changePhoneNumber`,
+				`${import.meta.env.VITE_API_GATEWAY_URL}/user/change-phone-number`,
 				data,
 				{ withCredentials: true }
 			);

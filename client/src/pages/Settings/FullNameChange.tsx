@@ -66,17 +66,25 @@ export const FullNameChange = () => {
 						<MyInput
 							type="text"
 							placeholder="Last Name"
-							{...register("lastName", { required: "Password is required" })}
+							{...register("lastName", { required: "This field is required" })}
 						/>
 
-						{errors.password && (
-							<p className="text-red-500 text-xs">{errors.password.message}</p>
+						{!data?.googleId && (
+							<>
+								{errors.password && (
+									<p className="text-red-500 text-xs">
+										{errors.password.message}
+									</p>
+								)}
+								<MyInput
+									type="password"
+									placeholder="Password"
+									{...register("password", {
+										required: "Password is required",
+									})}
+								/>
+							</>
 						)}
-						<MyInput
-							type="password"
-							placeholder="Password"
-							{...register("password", { required: "Password is required" })}
-						/>
 
 						<MyButton
 							text="Change"

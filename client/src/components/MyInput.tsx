@@ -5,10 +5,11 @@ type Props = {
 	placeholder: string;
 	width?: string;
 	margin?: string;
+	placeholderColor?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export const MyInput = forwardRef<HTMLInputElement, Props>(
-	({ type, placeholder, width, margin, ...rest }, ref) => {
+	({ type, placeholder, width, margin, placeholderColor, ...rest }, ref) => {
 		const customWidth = width ?? "min-w-[400px]";
 		const customMargin = margin ?? "mb-4";
 

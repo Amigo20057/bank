@@ -28,16 +28,22 @@ model Card {
 }
 
 model Loan {
-  id           BigInt     @id @default(autoincrement())
+  id           BigInt  @id @default(autoincrement())
   amount       Decimal
-  interestRate Float      @map("interest_rate")
-  termMonths   Int        @map("term_months")
-  issueDate    DateTime   @default(now()) @map("issue_date")
-  status       LoanStatus @default(ACTIVE)
-  cardId       BigInt     @map("card_id")
+  interestRate Decimal @map("interest_rate")
+  termMonths   Int     @map("term_months")
+  purpose      String?
+
+  totalRepayment Decimal @default(0.0) @map("total_repayment")
+  monthlyPayment Decimal @default(0.0) @map("monthly_payment")
+
+  issueDate DateTime   @default(now()) @map("issue_date")
+  status    LoanStatus @default(ACTIVE)
+  cardId    BigInt     @map("card_id")
 
   card Card @relation(fields: [cardId], references: [id])
 
+  @@index([cardId])
   @@map("loans")
 }
 

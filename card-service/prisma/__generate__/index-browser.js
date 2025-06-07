@@ -135,6 +135,9 @@ exports.Prisma.LoanScalarFieldEnum = {
   amount: 'amount',
   interestRate: 'interestRate',
   termMonths: 'termMonths',
+  purpose: 'purpose',
+  totalRepayment: 'totalRepayment',
+  monthlyPayment: 'monthlyPayment',
   issueDate: 'issueDate',
   status: 'status',
   cardId: 'cardId'
@@ -148,6 +151,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 exports.StatusCard = exports.$Enums.StatusCard = {
   ACTIVE: 'ACTIVE',

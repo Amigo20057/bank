@@ -34,7 +34,6 @@ export const Transactions = () => {
 		navigate("/auth/login");
 	}
 
-	// Групування по датах
 	const groupedData = transactionsData?.reduce((acc: any, tx: any) => {
 		const date = dayjs(tx.createdAt).format("DD/MM");
 		if (!acc[date]) acc[date] = { date, income: 0, outcome: 0 };
@@ -87,10 +86,12 @@ export const Transactions = () => {
 										key={idx}
 										className="flex justify-between border-b border-gray-800 py-3 hover:bg-white/5 px-2 rounded transition"
 									>
-										<div>
+										<div className="min-w-[255px]">
 											<p className="font-medium uppercase text-sm">{tx.type}</p>
 											<p className="text-xs text-gray-400">
-												{tx.senderCardNumber} ➜ {tx.recipientCardNumber}
+												{tx.senderCardNumber}
+												{tx.recipientCardNumber &&
+													` ➜ ${tx.recipientCardNumber}`}
 											</p>
 										</div>
 										<div className="text-right mr-[200px]">

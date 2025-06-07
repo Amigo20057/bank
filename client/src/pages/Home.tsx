@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../components/Card";
 import { Sidebar } from "../components/Sidebar";
 import { useCreateCard } from "../hooks/card/mutations/useCreateCard";
 import { useCards } from "../hooks/card/useCards";
 import { useTransactions } from "../hooks/transactions/useTransactions";
+import { useExchangeRates } from "../hooks/useExchangeRates";
 import { useProfile } from "../hooks/user/useProfile";
 import type { ICard } from "../types/card.interface";
 
@@ -18,14 +20,12 @@ import {
 	PlusIcon,
 	XIcon,
 } from "lucide-react";
-import { useState } from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
-import { useExchangeRates } from "../hooks/useExchangeRates";
-
-window.localStorage.setItem("language", "EN");
+import { useHomeTranslation } from "../hooks/translation/useHomeTranslation";
 
 export const Home = () => {
 	const navigate = useNavigate();
+	const { t } = useHomeTranslation();
 	const { data: userProfileData, isLoading: userIsLoading } = useProfile();
 	const { data: cardsData, isLoading: cardsIsLoading } = useCards();
 	const { createCardMutation } = useCreateCard();
@@ -36,6 +36,7 @@ export const Home = () => {
 		isError: isRatesError,
 	} = useExchangeRates();
 	const [menuOpen, setMenuOpen] = useState(false);
+
 	const popularCurrencies = ["USD", "EUR", "GBP", "UAH", "PLN", "JPY", "CNY"];
 	const numbersCards = cardsData?.map((card: ICard) => card.cardNumber) ?? [];
 
@@ -55,8 +56,8 @@ export const Home = () => {
 			.reduce((sum: any, tx: any) => sum + Number(tx.amount), 0) || 0;
 
 	const chartData = [
-		{ name: "Дохід", value: income },
-		{ name: "Витрати", value: outcome },
+		{ name: t.totalIncome, value: income },
+		{ name: t.totalExpense, value: outcome },
 	];
 
 	const chartColors = ["#22c55e", "#ef4444"];
@@ -101,7 +102,7 @@ export const Home = () => {
 			)}
 
 			<div className="p-4 sm:p-6 w-full min-h-screen lg:ml-[250px] bg-gradient-to-br from-[#1f2937] via-[#111827] to-black text-white">
-				<h2 className="text-xl font-semibold mb-4">Cards</h2>
+				<h2 className="text-xl font-semibold mb-4">{t.cards}</h2>
 
 				<div className="w-full flex flex-col sm:h-[250px] sm:flex-row items-start overflow-x-auto gap-4 relative justify-between">
 					<div className="flex sm:flex-row flex-col gap-4">
@@ -122,7 +123,7 @@ export const Home = () => {
 								className="min-w-[280px] w-full sm:w-80 h-48 bg-black/40 backdrop-blur-sm rounded-2xl border border-white/10 shadow-inner hover:shadow-lg cursor-pointer flex flex-col items-center justify-center transition-transform hover:scale-105"
 							>
 								<PlusIcon className="w-12 h-12 mb-2" />
-								<span className="text-lg font-semibold">Створити картку</span>
+								<span className="text-lg font-semibold">{t.createCard}</span>
 							</div>
 						)}
 					</div>
@@ -131,24 +132,20 @@ export const Home = () => {
 						<div className="flex items-center gap-2 mb-2">
 							<GlobeIcon className="text-cyan-400 w-5 h-5" />
 							<h3 className="text-lg font-semibold text-white">
-								Курс валют (від USD)
+								{t.currencyTitle}
 							</h3>
 						</div>
 
 						{isRatesLoading ? (
 							<div className="flex items-center justify-center py-8">
 								<div className="w-6 h-6 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
-								<span className="ml-2 text-gray-400">
-									Завантаження курсів...
-								</span>
+								<span className="ml-2 text-gray-400">{t.loadingRates}</span>
 							</div>
 						) : isRatesError ? (
 							<div className="text-center py-4">
-								<p className="text-red-400 text-sm mb-2">
-									❌ Помилка завантаження курсів
-								</p>
+								<p className="text-red-400 text-sm mb-2">{t.errorLoading}</p>
 								<p className="text-gray-500 text-xs">
-									{ratesError?.message || "Спробуйте оновити сторінку"}
+									{ratesError?.message || t.tryAgain}
 								</p>
 							</div>
 						) : (
@@ -201,28 +198,28 @@ export const Home = () => {
 					<div className="bg-black/40 p-4 rounded-xl border border-white/10 shadow-inner flex items-center gap-4">
 						<CreditCardIcon className="w-8 h-8 text-blue-400" />
 						<div>
-							<p className="text-sm text-gray-400">Карток у вас</p>
+							<p className="text-sm text-gray-400">{t.yourCards}</p>
 							<p className="text-2xl font-bold">{cardsData?.length}</p>
 						</div>
 					</div>
 					<div className="bg-black/40 p-4 rounded-xl border border-white/10 shadow-inner flex items-center gap-4">
 						<ArrowTrendingUpIcon className="w-8 h-8 text-green-400" />
 						<div>
-							<p className="text-sm text-gray-400">Всього доходів</p>
+							<p className="text-sm text-gray-400">{t.totalIncome}</p>
 							<p className="text-2xl font-bold text-green-400">+{income} USD</p>
 						</div>
 					</div>
 					<div className="bg-black/40 p-4 rounded-xl border border-white/10 shadow-inner flex items-center gap-4">
 						<ArrowTrendingDownIcon className="w-8 h-8 text-red-400" />
 						<div>
-							<p className="text-sm text-gray-400">Всього витрат</p>
+							<p className="text-sm text-gray-400">{t.totalExpense}</p>
 							<p className="text-2xl font-bold text-red-400">−{outcome} USD</p>
 						</div>
 					</div>
 				</div>
 
 				<h2 className="text-xl font-semibold mt-10 mb-2">
-					Recent Transactions
+					{t.recentTransactions}
 				</h2>
 
 				<div className="flex flex-col lg:flex-row gap-6 relative">
@@ -253,7 +250,9 @@ export const Home = () => {
 													{tx.type}
 												</p>
 												<p className="text-xs text-gray-400">
-													{tx.senderCardNumber} ➜ {tx.recipientCardNumber}
+													{tx.senderCardNumber}
+													{tx.recipientCardNumber &&
+														` ➜ ${tx.recipientCardNumber}`}
 												</p>
 											</div>
 											<div className="text-right">
@@ -274,13 +273,15 @@ export const Home = () => {
 								})}
 							</ul>
 						) : (
-							<p className="text-center text-gray-400 py-6">Транзакцій немає</p>
+							<p className="text-center text-gray-400 py-6">
+								{t.noTransactions}
+							</p>
 						)}
 					</div>
 
 					{transactionsData?.length > 0 && (
-						<div className="bg-black/40 w-full lg:w-[750px] h-[400px] rounded-xl p-4 border border-white/10 shadow-inner">
-							<h3 className="text-white text-lg mb-2">Фінансовий огляд</h3>
+						<div className="bg-black/40 w-full lg:w-[1000px] h-[400px] rounded-xl p-4 border border-white/10 shadow-inner">
+							<h3 className="text-white text-lg mb-2">{t.financialOverview}</h3>
 							<ResponsiveContainer width="100%" height="100%">
 								<PieChart>
 									<Pie

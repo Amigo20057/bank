@@ -1,14 +1,21 @@
 import { Route, Routes } from "react-router-dom";
 import {
+	DateOfBirthChange,
+	DeleteCard,
 	EmailChange,
 	FullNameChange,
 	Home,
+	Loan,
+	Loans,
 	Login,
+	Notification,
 	Profile,
 	Register,
+	RequestVerification,
 	Security,
 	Transactions,
 	Transfers,
+	VerifyAccount,
 } from "./pages";
 import { AddressChange } from "./pages/Settings/AddressChange";
 import { PassportNumberChange } from "./pages/Settings/PassportNumberChange";
@@ -26,6 +33,10 @@ export const App = () => {
 			<Route path="/transfers" element={<Transfers />} />
 			<Route path="/profile" element={<Profile />} />
 			<Route path="/security" element={<Security />} />
+			<Route path="/notifications" element={<Notification />} />
+
+			<Route path="/loans" element={<Loan />} />
+			<Route path="/loan/loans" element={<Loans />} />
 
 			<Route path="/settings/change-email" element={<EmailChange />} />
 			<Route path="/settings/change-name" element={<FullNameChange />} />
@@ -39,6 +50,17 @@ export const App = () => {
 				element={<PhoneNumberChange />}
 			/>
 			<Route path="/settings/change-password" element={<PasswordChange />} />
+
+			<Route
+				path="/settings/request-verification"
+				element={<RequestVerification />}
+			/>
+			<Route path="/settings/verify-account" element={<VerifyAccount />} />
+			<Route
+				path="/settings/change-date-of-birth"
+				element={<DateOfBirthChange />}
+			/>
+			<Route path="/settings/delete-card" element={<DeleteCard />} />
 		</Routes>
 	);
 };

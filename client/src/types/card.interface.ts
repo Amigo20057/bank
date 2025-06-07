@@ -8,3 +8,12 @@ export interface ICard {
 	status: "ACTIVE" | "BLOCKED" | "EXPIRED";
 	valuta: string;
 }
+
+export interface ILoan {
+	amount: number;
+	cardNumber: string;
+	cvvCode: number;
+	percent: number;
+	purpose: string;
+	term: number;
+}

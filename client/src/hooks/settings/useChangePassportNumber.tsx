@@ -12,7 +12,7 @@ export const useChangePassportNumber = () => {
 			password: string;
 		}) => {
 			return await axios.patch(
-				`${import.meta.env.VITE_API_GATEWAY_URL}/user/changePassportNumber`,
+				`${import.meta.env.VITE_API_GATEWAY_URL}/user/change-passport-number`,
 				data,
 				{ withCredentials: true }
 			);

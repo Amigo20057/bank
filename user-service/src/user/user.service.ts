@@ -5,7 +5,7 @@ import {
     NotFoundException,
     UnauthorizedException,
 } from "@nestjs/common";
-import { verify } from "argon2";
+import { hash, verify } from "argon2";
 import { randomInt } from "crypto";
 import Redis from "ioredis";
 import { User } from "prisma/__generate__";
@@ -132,7 +132,7 @@ export class UserService {
             },
         });
         if (!record || record.code !== code || record.expiresAt < new Date()) {
-            return false;
+            throw new BadRequestException("Invalid Code");
         }
         await this.prisma.verificationCode.delete({
             where: { email: user.email },
@@ -140,7 +140,7 @@ export class UserService {
         return true;
     }
 
-    public async verifiedUser(userId: string): Promise<void> {
+    public async verifiedUser(userId: string, token: string): Promise<void> {
         const user = await this.findUserById(userId);
         if (!user) {
             throw new NotFoundException("User not found");
@@ -149,9 +149,14 @@ export class UserService {
             where: { id: userId },
             data: { isVerified: true },
         });
+        const updatedUser = await this.findUserById(userId);
+        await this.redisClient.set(
+            token,
+            JSON.stringify(updatedUser),
+            "EX",
+            60 * 15,
+        );
     }
-
-    public async changePassword(newPassword: string, oldPassword?: string) {}
 
     public async resetPassword(email: string, code: string): Promise<boolean> {
         const user = await this.findUserByEmail(email);
@@ -179,12 +184,132 @@ export class UserService {
     public async changeFullName(
         email: string,
         token: string,
-        data: { firstName: string; lastName: string; password: string },
+        data: { firstName: string; lastName: string; password?: string },
     ): Promise<void> {
         const user = await this.prisma.user.findUnique({ where: { email } });
 
         if (!user) {
             throw new NotFoundException("User not found");
+        }
+
+        if (!user.googleId) {
+            if (!data.password) {
+                throw new UnauthorizedException("Password is required");
+            }
+
+            const isPasswordValid = await verify(user.password, data.password);
+            if (!isPasswordValid) {
+                throw new UnauthorizedException("Incorrect password");
+            }
+        }
+
+        const updatedUser = await this.prisma.user.update({
+            where: { email },
+            data: {
+                firstName: data.firstName,
+                lastName: data.lastName,
+            },
+        });
+
+        await this.redisClient.set(
+            token,
+            JSON.stringify(updatedUser),
+            "EX",
+            60 * 15,
+        );
+    }
+
+    public async changePhoneNumber(
+        email: string,
+        token: string,
+        data: { newPhoneNumber: string; password?: string },
+    ): Promise<void> {
+        const user = await this.prisma.user.findUnique({ where: { email } });
+
+        if (!user) {
+            throw new NotFoundException("User not found");
+        }
+
+        if (!user.googleId) {
+            if (!data.password) {
+                throw new UnauthorizedException("Password is required");
+            }
+
+            const isPasswordValid = await verify(user.password, data.password);
+            if (!isPasswordValid) {
+                throw new UnauthorizedException("Incorrect password");
+            }
+        }
+
+        const updatedUser = await this.prisma.user.update({
+            where: { email },
+            data: {
+                telephoneNumber: data.newPhoneNumber,
+            },
+        });
+
+        await this.redisClient.set(
+            token,
+            JSON.stringify(updatedUser),
+            "EX",
+            60 * 15,
+        );
+    }
+
+    public async changeAddress(
+        email: string,
+        token: string,
+        data: { newAddress: string; password?: string },
+    ): Promise<void> {
+        const user = await this.prisma.user.findUnique({ where: { email } });
+
+        if (!user) {
+            throw new NotFoundException("User not found");
+        }
+
+        // Якщо акаунт НЕ через Google — перевірка пароля обов'язкова
+        if (!user.googleId) {
+            if (!data.password) {
+                throw new UnauthorizedException("Password is required");
+            }
+
+            const isPasswordValid = await verify(user.password, data.password);
+            if (!isPasswordValid) {
+                throw new UnauthorizedException("Incorrect password");
+            }
+        }
+
+        const updatedUser = await this.prisma.user.update({
+            where: { email },
+            data: {
+                address: data.newAddress,
+            },
+        });
+
+        await this.redisClient.set(
+            token,
+            JSON.stringify(updatedUser),
+            "EX",
+            60 * 15,
+        );
+    }
+
+    public async changeEmail(
+        email: string,
+        token: string,
+        data: { newEmail: string; password: string },
+    ) {
+        const user = await this.prisma.user.findUnique({ where: { email } });
+        const findUserWithNewEmail = await this.prisma.user.findUnique({
+            where: { email: data.newEmail },
+        });
+
+        if (!user) {
+            throw new NotFoundException("User not found");
+        }
+
+        if (findUserWithNewEmail) {
+            throw new BadRequestException("User with new email exists");
         }
 
         const isPasswordValid = await verify(user.password, data.password);
@@ -195,8 +320,133 @@ export class UserService {
         const updatedUser = await this.prisma.user.update({
             where: { email },
             data: {
-                firstName: data.firstName,
-                lastName: data.lastName,
+                email: data.newEmail,
+                isVerified: false,
+            },
+        });
+
+        await this.redisClient.set(
+            token,
+            JSON.stringify(updatedUser),
+            "EX",
+            60 * 15,
+        );
+    }
+
+    public async changePassportNumber(
+        email: string,
+        token: string,
+        data: { newPassportNumber: string; password?: string },
+    ): Promise<void> {
+        const user = await this.prisma.user.findUnique({ where: { email } });
+
+        if (!user) {
+            throw new NotFoundException("User not found");
+        }
+
+        const existingUser = await this.prisma.user.findFirst({
+            where: { passportNumber: data.newPassportNumber },
+        });
+
+        if (existingUser) {
+            throw new BadRequestException(
+                "User with this passport number already exists",
+            );
+        }
+
+        if (!user.googleId) {
+            if (!data.password) {
+                throw new UnauthorizedException("Password is required");
+            }
+
+            const isPasswordValid = await verify(user.password, data.password);
+            if (!isPasswordValid) {
+                throw new UnauthorizedException("Incorrect password");
+            }
+        }
+
+        const updatedUser = await this.prisma.user.update({
+            where: { email },
+            data: {
+                passportNumber: data.newPassportNumber,
+                isVerified: false,
+            },
+        });
+
+        await this.redisClient.set(
+            token,
+            JSON.stringify(updatedUser),
+            "EX",
+            60 * 15,
+        );
+    }
+
+    public async changePassword(
+        email: string,
+        token: string,
+        data: { oldPassword: string; newPassword: string },
+    ) {
+        const user = await this.prisma.user.findUnique({ where: { email } });
+
+        if (!user) {
+            throw new NotFoundException("User not found");
+        }
+
+        const isPasswordValid = await verify(user.password, data.oldPassword);
+
+        if (!isPasswordValid) {
+            throw new UnauthorizedException("Incorrect password");
+        }
+
+        const hashPassword = await hash(data.newPassword);
+
+        const updatedUser = await this.prisma.user.update({
+            where: { email },
+            data: {
+                password: hashPassword,
+                lastChangePassword: new Date(),
+            },
+        });
+
+        await this.redisClient.set(
+            token,
+            JSON.stringify(updatedUser),
+            "EX",
+            60 * 15,
+        );
+    }
+
+    public async changeDateOfBirth(
+        email: string,
+        token: string,
+        data: { newDate: Date; password?: string },
+    ): Promise<void> {
+        const user = await this.prisma.user.findUnique({ where: { email } });
+
+        if (!user) {
+            throw new NotFoundException("User not found");
+        }
+
+        const parsedDate = new Date(data.newDate);
+        if (isNaN(parsedDate.getTime())) {
+            throw new BadRequestException("Invalid date format");
+        }
+
+        if (!user.googleId) {
+            if (!data.password) {
+                throw new UnauthorizedException("Password is required");
+            }
+
+            const isPasswordValid = await verify(user.password, data.password);
+            if (!isPasswordValid) {
+                throw new UnauthorizedException("Incorrect password");
+            }
+        }
+
+        const updatedUser = await this.prisma.user.update({
+            where: { email },
+            data: {
+                dateOfBirth: parsedDate,
             },
         });
 

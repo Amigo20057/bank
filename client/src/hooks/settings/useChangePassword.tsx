@@ -9,7 +9,7 @@ export const useChangePassword = () => {
 	const changePasswordMutation = useMutation({
 		mutationFn: async (data: { oldPassword: string; newPassword: string }) => {
 			return await axios.patch(
-				`${import.meta.env.VITE_API_GATEWAY_URL}/user/changePassword`,
+				`${import.meta.env.VITE_API_GATEWAY_URL}/user/change-password`,
 				data,
 				{ withCredentials: true }
 			);

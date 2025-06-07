@@ -6,7 +6,8 @@ export class CreateTransactionDto {
     id?: number;
 
     @IsString()
-    recipientCardNumber: string;
+    @IsOptional()
+    recipientCardNumber?: string;
 
     @IsString()
     @IsOptional()

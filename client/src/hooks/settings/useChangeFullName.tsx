@@ -13,7 +13,7 @@ export const useChangeFullName = () => {
 			password: string;
 		}) => {
 			return await axios.patch(
-				`${import.meta.env.VITE_API_GATEWAY_URL}/user/changeFullName`,
+				`${import.meta.env.VITE_API_GATEWAY_URL}/user/change-full-name`,
 				data,
 				{ withCredentials: true }
 			);

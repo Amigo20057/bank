@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+    BadRequestException,
+    Injectable,
+    NotFoundException,
+} from "@nestjs/common";
 import { Prisma } from "prisma/__generate__";
 import { Decimal } from "prisma/__generate__/runtime/library";
 import { serializePrisma } from "src/common/utils/serializePrisma";
@@ -7,12 +11,20 @@ const generateCreditCard = require("generate-visa-card-number-test");
 
 @Injectable()
 export class CardService {
-    public constructor(private readonly prisma: PrismaService) {}
+    public constructor(public readonly prisma: PrismaService) {}
 
     public async findCardByNumberCard(cardNumber: string) {
         return await this.prisma.card.findUnique({
             where: {
                 cardNumber,
+            },
+        });
+    }
+
+    public async findCardById(cardId: number | bigint) {
+        return await this.prisma.card.findUnique({
+            where: {
+                id: cardId,
             },
         });
     }
@@ -66,7 +78,50 @@ export class CardService {
 
     public async blockCard() {}
 
-    public async deleteCard() {}
+    public async deleteCard(cardId: number, cvvCode: number) {
+        const card = await this.prisma.card.findUnique({
+            where: { id: cardId },
+        });
+        if (!card) {
+            throw new NotFoundException("Card not found");
+        }
 
-    public async updateCard() {}
+        if (card.cvvCode !== +cvvCode) {
+            throw new BadRequestException("Incorrect cvv code");
+        }
+
+        if (card.balance > new Decimal(0)) {
+            throw new BadRequestException(
+                "You can't delete a card if you have a balance on it",
+            );
+        }
+
+        await this.prisma.card.delete({
+            where: {
+                id: cardId,
+            },
+        });
+    }
+
+    public async getLoans(cardNumber: string, userId: string): Promise<any[]> {
+        const receivedCard = await this.prisma.card.findUnique({
+            where: { cardNumber, userId },
+        });
+
+        if (!receivedCard) {
+            throw new NotFoundException("Card not found");
+        }
+
+        const loans = await this.prisma.loan.findMany({
+            where: {
+                cardId: Number(receivedCard.id),
+            },
+        });
+
+        return loans.map((loan) => ({
+            ...loan,
+            id: loan.id.toString(),
+            cardId: loan.cardId.toString(),
+        }));
+    }
 }
